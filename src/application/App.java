@@ -31,6 +31,7 @@ public class App {
             }
         } catch (IOException e) {
             System.out.println("Erro " + e.getMessage());
+        }
 
             double precoMedio = produtos.isEmpty() ? 0.0 : produtos.stream().mapToDouble(Product::getPrice).sum() / produtos.size();
 
@@ -40,6 +41,5 @@ public class App {
             List<Product> lista = produtos.stream().filter(p -> p.getPrice() < precoMedio).sorted().collect(Collectors.toList());
             lista.forEach(System.out::println);
 
-        }
     }
 }

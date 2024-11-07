@@ -10,7 +10,6 @@ import java.util.Scanner;
 import java.util.stream.Collectors;
 
 public class App {
-
     private static final String DELIMITADOR = ",";
 
     public static void main(String[] args) {
@@ -24,21 +23,24 @@ public class App {
             String linha = bf.readLine();
             while (linha != null) {
                 String[] split = linha.split(DELIMITADOR);
-                String nome = split[0];
-                double preco = Double.parseDouble(split[1]);
-                produtos.add(new Product(nome, preco));
+                produtos.add(new Product(split[0],Double.parseDouble(split[1])));
                 linha = bf.readLine();
             }
         } catch (IOException e) {
             System.out.println("Erro " + e.getMessage());
         }
 
-            double precoMedio = produtos.isEmpty() ? 0.0 : produtos.stream().mapToDouble(Product::getPrice).sum() / produtos.size();
+            double precoMedio = produtos.isEmpty() ? 0.0 : produtos.stream()
+                    .mapToDouble(Product::getPrice)
+                    .sum() / produtos.size();
 
             System.out.println("Preço Médio Dos Produtos: " + String.format("%.2f", precoMedio));
             System.out.println();
 
-            List<Product> lista = produtos.stream().filter(p -> p.getPrice() < precoMedio).sorted().collect(Collectors.toList());
+            List<Product> lista = produtos.stream()
+                    .filter(p -> p.getPrice() < precoMedio)
+                    .sorted().collect(Collectors.toList());
+
             lista.forEach(System.out::println);
 
     }
